@@ -149,8 +149,6 @@ class App extends React.Component {
               <label htmlFor="deadline">Deadline</label>
               <input
                 type="date" id="start" name="deadline"
-                min="2020-01-01"
-                max="2020-12-31"
                 value={this.state.deadline}
                 onChange={this.updateDeadline}
               />
