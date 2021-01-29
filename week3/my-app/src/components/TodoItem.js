@@ -27,6 +27,7 @@ function TodoItem(props) {
                 </div>
               )}
 
+            <div className="editable-text-dlt-edit-btn">
               {props.isEdited && (
                 <div>
 
@@ -70,6 +71,8 @@ function TodoItem(props) {
                 }
               }}/>
             </div>
+
+          </div>
 
         </div>
     )
