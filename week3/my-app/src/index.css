@@ -68,3 +68,18 @@ input, label {
   background-color: transparent;
   border: 0;
 }
+
+@media only screen and (max-width: 455px) {
+  .todo-list {
+    width: 200px;
+  }
+
+  .todo-item {
+    width: 200px;
+  }
+
+  .editable-text-dlt-edit-btn {
+    display: flex;
+    flex-direction: column;
+  }
+}
