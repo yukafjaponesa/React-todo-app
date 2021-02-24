@@ -196,11 +196,12 @@ export default App
 
 
 
-import React from "react"
-import TodoItem from "./components/TodoItem"
-import todosData from "./components/todosData"
-import Timer from "./components/Timer"
-//import FlipMove from "react-flip-move"
+import React from "react";
+import TodoItem from "./components/TodoItem";
+import todosData from "./components/todosData";
+import Timer from "./components/Timer";
+//import FlipMove from "react-flip-move";
+import { v4 as uuidv4 } from 'uuid'; //npm install uuid
 
 
 class App extends React.Component {
@@ -209,14 +210,11 @@ class App extends React.Component {
         this.state = {
             todos: window.localStorage.getItem('todos') ? JSON.parse(window.localStorage.getItem('todos')) : [],
             //setTodos: todosData,
+            id: uuidv4(),
             newItem: "",
             deadline: "",
             editing: false
         }
-
-        // const [todos, setTodos] = useState(todosDatas);
-        // this.setTodos = setTodos;
-        // this.todos = todos;
 
         this.handleChange = this.handleChange.bind(this)
         this.addTodo = this.addTodo.bind(this)
@@ -238,6 +236,7 @@ class App extends React.Component {
             return todo;
           }
         });
+        localStorage.setItem('todos',JSON.stringify(updatedTodos))
         return { todos: updatedTodos };
       });
     }
@@ -253,8 +252,14 @@ class App extends React.Component {
       }
       const newTodos = this.state.todos.concat([newTodo]);
       this.setState({
-        todos: newTodos
+        todos: newTodos,
+        newItem: "",
+        deadline: "",
+        id: uuidv4(),//id: this.state.todos.length + 1,
+        editing: false
       })
+
+      localStorage.setItem('todos',JSON.stringify(newTodos))
     }
 
     updateInput(value, id) {
@@ -266,6 +271,7 @@ class App extends React.Component {
             return todo;
           }
         })
+        localStorage.setItem('todos',JSON.stringify(updatedTodos))
         return {todos: updatedTodos}
       })
     }
@@ -281,7 +287,8 @@ class App extends React.Component {
             return todo;
           }
         })
-        return {todos: updatedTodos}
+        localStorage.setItem('todos',JSON.stringify(updatedTodos))
+        return {todos: updatedTodos}  // update tpdps, need setItem
       })
     }
 
@@ -304,7 +311,10 @@ class App extends React.Component {
       this.setState({
       todos: filteredItems
     })
+    localStorage.setItem('todos',JSON.stringify(filteredItems))
   }
+
+
 
   editItem(id) {
     this.setState({
@@ -314,20 +324,20 @@ class App extends React.Component {
 
   handleFormSubmit(e) {
     e.preventDefault();
-    const newItem = {
-      todos: this.state.todos
-    }
-    const updatedItems = [...this.state.todos, newItem];
-    console.log({updatedItems});
+    // const newItem = {
+    //   todos: this.state.todos
+    // }
+    // const updatedItems = [...this.state.todos];
+    // console.log({updatedItems});
 
-    window.localStorage.setItem('todos', JSON.stringify(updatedItems));
+    // window.localStorage.setItem('todos', JSON.stringify(updatedItems));
 
-    this.setState({
-      newItem: "",
-      deadline: "",
-      id: this.state.todos.length + 1,
-      editing: false
-    })
+    // this.setState({
+    //   newItem: "",
+    //   deadline: "",
+    //   id: uuidv4(),//id: this.state.todos.length + 1,
+    //   editing: false
+    // })
   };
 
   componentDidMount() {
