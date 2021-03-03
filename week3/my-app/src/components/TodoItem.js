@@ -1,4 +1,5 @@
 import React from "react"
+import format from 'date-fns/format'
 
 function TodoItem(props) {
   const completedStyle = {
@@ -20,7 +21,7 @@ function TodoItem(props) {
               {!props.isEdited && (
                 <div>
                   <p style={props.item.completed ? completedStyle: null}>{props.item.text}</p>
-                  <p style={props.item.completed ? completedStyle: null}>{props.item.deadline}</p>
+                  <p style={props.item.completed ? completedStyle: null}>{format(new Date(props.item.deadline),'eee do MM yyyy')}</p>
                 </div>
               )}
 
