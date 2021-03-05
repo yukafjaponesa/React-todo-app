@@ -1,17 +1,22 @@
-import React from "react"
+import React, {useContext} from 'react'
 import format from 'date-fns/format'
+import {ThemeContext} from '../contexts/ThemeContext'
 
 function TodoItem(props) {
+  const themeChange = useContext(ThemeContext)
+  const theme = themeChange.isLightTheme ? themeChange.light : themeChange.dark
+
   const completedStyle = {
       fontStyle: 'italic',
-      color: '#cdcdcd',
+      //color: '#cdcdcd',
+      color: '#A9A9A9',
       textDecoration: 'line-through'
   }
 
   const buttontext = (props.isEdited ? 'Update' : 'Edit');
 
     return (
-        <div className="todo-item">
+        <div className="todo-item" style={{background: theme.ui, color: theme.syntax}}>
               <input
                   type="checkbox"
                   checked={props.item.completed}

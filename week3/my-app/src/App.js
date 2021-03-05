@@ -2,9 +2,10 @@ import React from "react";
 import TodoItem from "./components/TodoItem";
 import todosData from "./components/todosData";
 import Timer from "./components/Timer";
+import ThemeContextProvider from "./contexts/ThemeContext";
 //import FlipMove from "react-flip-move";
 import { v4 as uuidv4 } from 'uuid'; //npm install uuid
-
+import ThemeToggle from './components/ThemeToggle';
 
 class App extends React.Component {
     constructor(props) {
@@ -117,8 +118,6 @@ class App extends React.Component {
     localStorage.setItem('todos',JSON.stringify(filteredItems))
   }
 
-
-
   editItem(id) {
     this.setState({
       editing: id
@@ -155,41 +154,44 @@ class App extends React.Component {
 
         return (
           <div className="todo-list" >
-          {/*<DayPicker />*/}
-          <Timer />
+            <ThemeContextProvider>
+              {/*<DayPicker />*/}
+              <Timer />
 
-          <form onSubmit={this.handleFormSubmit}>
-            <div className="add-todo">
-              <label>Add an item...</label>
-              <input
-                type="text"
-                name="todo"
-                placeholder="Type item here..."
-                value={this.state.newItem}
-                onChange={this.updateItem}
-              />
-            </div>
+              <form onSubmit={this.handleFormSubmit}>
+                <div className="add-todo">
+                  <label>Add an item...</label>
+                  <input
+                    type="text"
+                    name="todo"
+                    placeholder="Type item here..."
+                    value={this.state.newItem}
+                    onChange={this.updateItem}
+                  />
+                </div>
 
-            <div className="date">
-              <label htmlFor="deadline">Deadline</label>
-              <input
-                type="date" id="start" name="deadline"
-                min="2021-01-01"
-                //max="2024-12-31"
-                value={this.state.deadline}
-                onChange={this.updateDeadline}
-              />
-            </div>
+                <div className="date">
+                  <label htmlFor="deadline">Deadline</label>
+                  <input
+                    type="date" id="start" name="deadline"
+                    min="2021-01-01"
+                    //max="2024-12-31"
+                    value={this.state.deadline}
+                    onChange={this.updateDeadline}
+                  />
+                </div>
 
-            <button type="submit" onClick={this.addTodo}>Add to the list</button>
-          </form>
+                <button type="submit" onClick={this.addTodo}>Add to the list</button>
+              </form>
 
-            {todoItems.length === 0 ? <p>No items</p> : null}
+              {todoItems.length === 0 ? <p>No items</p> : null}
 
-            <div className="todoitems" >
-              {todoItems}
-            </div>
+              <div className="todoitems" >
+                {todoItems}
+              </div>
 
+              <ThemeToggle />
+            </ThemeContextProvider>
           </div>
         )
     }
