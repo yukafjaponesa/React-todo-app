@@ -9,10 +9,21 @@ class ThemeContextProvider extends Component  {
     dark: {syntax: '#ddd', ui: '#333', bg: '#555'}
   }
 
+
   toggleTheme = () => {
-    this.setState({isLightTheme: !this.state.isLightTheme});
+    const newTheme = !this.state.isLightTheme
+    this.setState({isLightTheme: newTheme})
+    localStorage.setItem('isLightTheme', newTheme);
   }
 
+
+  componentDidMount() { // useEffect with empty [], executed once
+    const lightTheme = JSON.parse(localStorage.getItem('isLightTheme'))
+    console.log({lightTheme})
+       this.setState({isLightTheme: lightTheme})
+  }
+
+  //componentDidUpdate
   render() {
     return(
       <ThemeContext.Provider value={{...this.state, toggleTheme: this.toggleTheme}}> {/*provide objects so need another {} */}

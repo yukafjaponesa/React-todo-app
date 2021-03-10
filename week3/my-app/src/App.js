@@ -153,8 +153,9 @@ class App extends React.Component {
 
 
         return (
+          <ThemeContextProvider>
           <div className="todo-list" >
-            <ThemeContextProvider>
+
               {/*<DayPicker />*/}
               <Timer />
 
@@ -181,7 +182,7 @@ class App extends React.Component {
                   />
                 </div>
 
-                <button type="submit" onClick={this.addTodo}>Add to the list</button>
+                <button className="add-btn" type="submit" onClick={this.addTodo}>Add to the list</button>
               </form>
 
               {todoItems.length === 0 ? <p>No items</p> : null}
@@ -191,8 +192,9 @@ class App extends React.Component {
               </div>
 
               <ThemeToggle />
-            </ThemeContextProvider>
+
           </div>
+          </ThemeContextProvider>
         )
     }
 }

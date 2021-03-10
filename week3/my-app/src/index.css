@@ -5,7 +5,8 @@ body {
 .todo-list {
     background-color: white;
     margin: auto;
-    width: 50%;
+    /*width: 50%;*/
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
